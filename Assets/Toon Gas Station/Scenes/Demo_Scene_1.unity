@@ -19153,7 +19153,6 @@ GameObject:
   - component: {fileID: 1388537711}
   - component: {fileID: 1388537709}
   - component: {fileID: 1388537708}
-  - component: {fileID: 1388537710}
   - component: {fileID: 1388537713}
   - component: {fileID: 1388537714}
   m_Layer: 0
@@ -19179,18 +19178,6 @@ Behaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388537707}
   m_Enabled: 1
---- !u!114 &1388537710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388537707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &1388537711
 Camera:
   m_ObjectHideFlags: 0
