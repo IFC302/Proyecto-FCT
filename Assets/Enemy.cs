@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     public bool IsAlive
     {
         // Solo queremos que esté vivo si las vidas son > 0
-        get { return true; }
+        get { return lives > 0; }
     }
 
     void Start()
@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     {
         if (--lives <= 0)
         {
-            //SetState(State.Dead);
+            SetState(State.Dead);
         }
     }
 
@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
                     // Animación de morir
                     _ac.CrossFade("Die", 0.1f);
                     // Si hacemos un destroy de this va a destruir el componente Enemy, no el objeto
-                    //Destroy(gameObject, 2f); // Destruimos el objeto en 2 sec
+                    Destroy(gameObject, 2f); // Destruimos el objeto en 2 sec
                     break;
             }
         }
