@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // Estados del poli
+    enum State
+    {
+        Idle,
+        Running,
+        Attacking,
+        Dead
+    }
+
     // Start is called before the first frame update
     void Start()
     {
