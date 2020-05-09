@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
     }
 
     // Busca al enemigo mas cercano
-    Enemy FindClosesEnemyInRange()
+    Enemy FindClosestEnemyInRange()
     {
         float closest = int.MaxValue;
         Enemy candidate = null;
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
                 break;
             case State.Idle:
                 // Busca al enemigo más cercano
-                Enemy candidate = FindClosesEnemyInRange();
+                Enemy candidate = FindClosestEnemyInRange();
                 // Si lo encuentra
                 if (candidate != null)
                 {
