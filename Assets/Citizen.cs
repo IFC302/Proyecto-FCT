@@ -68,6 +68,16 @@ public class Citizen : MonoBehaviour
         if (_state != state)
         {
             _state = state;
+            switch (_state)
+            {
+                case State.Running:
+                    break;
+
+                case State.Dead:
+                    Instantiate(_zombie, transform.position, transform.rotation);
+                    Destroy(gameObject);
+                    break;
+            }
         }
     }
 }
