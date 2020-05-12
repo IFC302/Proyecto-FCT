@@ -55,7 +55,7 @@ public class Citizen : MonoBehaviour
         if (_state == State.Running)
         {
             // Si el ciudadano ha llegado a su destino
-            if (_agent.remainingDistance > 1f)
+            if ((_target - transform.position).sqrMagnitude < 1f)
             {
                 // Lo mandamos a otro sitio
                 _agent.SetDestination(new Vector3(10f, 0, 10f));
