@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Stage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Stage Instance;
 
-    // Update is called once per frame
-    void Update()
+    public List<Transform> Objectives = new List<Transform>(); // Objetivos: Papel higiénico, comida, etc.
+
+    public List<Transform> Cars = new List<Transform>(); // Resguardo
+
+    void Awake()
     {
-        
+        Instance = this;
     }
 }

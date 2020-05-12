@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,7 +21,7 @@ public class Citizen : MonoBehaviour
     State _state = State.Idle;
     NavMeshAgent _agent;
     Animator _ac;
-
+    int _objectives = 1; // lista de objetivos a coger
     Vector3 _target = Vector3.zero;
 
     public void Hit(int damage)
@@ -43,10 +42,18 @@ public class Citizen : MonoBehaviour
         Citizens.Remove(this);
     }
 
+    void GetNextObjetive()
+    {
+        _target = Stage.Instance.Objectives[Random.Range(0, Stage.Instance.Objectives.Count)].position;
+    }
+
     void Start()
     {
+        // Siguiente objetivo
+        GetNextObjetive();
         _ac = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+        _target = Stage.Instance.Objectives[Random.Range(0, Stage.Instance.Objectives.Count)].position;
         _agent.SetDestination(_target); // Destino del ciudadano
         SetState(State.Running);
     }
@@ -59,8 +66,18 @@ public class Citizen : MonoBehaviour
             // Si el ciudadano ha llegado a su destino
             if ((_target - transform.position).sqrMagnitude < 1f)
             {
-                // Lo mandamos a otro sitio
-                _agent.SetDestination(new Vector3(10f, 0, 10f));
+                _objectives -= 1;
+                // Si sigue teniendo objetivos
+                if (_objectives > 0)
+                {
+                    GetNextObjetive();
+                }
+                else
+                {
+                    // Se va al coche
+                    _target = Stage.Instance.Cars[Random.Range(0, Stage.Instance.Cars.Count)].position;
+                    _agent.SetDestination(_target);
+                }
             }
         }
     }
