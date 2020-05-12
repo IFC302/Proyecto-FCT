@@ -70,13 +70,19 @@ public class Citizen : MonoBehaviour
                 // Si sigue teniendo objetivos
                 if (_objectives > 0)
                 {
+                    // Se va al siguiente
                     GetNextObjetive();
                 }
-                else
+                else if (_objectives == 0) // Cuándo llege al papel higiénico
                 {
                     // Se va al coche
                     _target = Stage.Instance.Cars[Random.Range(0, Stage.Instance.Cars.Count)].position;
                     _agent.SetDestination(_target);
+                }
+                else // Cuándo llege al coche (-1)
+                {
+                    _ac.CrossFade("Idle", 0.1f);
+                    Destroy(gameObject, 0.4f);
                 }
             }
         }
