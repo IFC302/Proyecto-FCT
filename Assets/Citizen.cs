@@ -21,6 +21,7 @@ public class Citizen : MonoBehaviour
     int health = 2;
     State _state = State.Idle;
     NavMeshAgent _agent;
+    Animator _ac;
 
     Vector3 _target = Vector3.zero;
 
@@ -44,6 +45,7 @@ public class Citizen : MonoBehaviour
 
     void Start()
     {
+        _ac = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.SetDestination(_target); // Destino del ciudadano
         SetState(State.Running);
@@ -71,9 +73,11 @@ public class Citizen : MonoBehaviour
             switch (_state)
             {
                 case State.Running:
+                    _ac.CrossFade("Run", 0.1f); // En vez de hacer un play directo hace una pequeña transición
                     break;
 
                 case State.Dead:
+                    _ac.CrossFade("Die", 0.1f);
                     Instantiate(_zombie, transform.position, transform.rotation);
                     Destroy(gameObject);
                     break;
