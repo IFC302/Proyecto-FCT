@@ -12685,6 +12685,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pedro
       objectReference: {fileID: 0}
+    - target: {fileID: 1454218048069673832, guid: 9aaf4aacb7c85b34185a9b1a8cbbf8c6,
+        type: 3}
+      propertyPath: m_Speed
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9aaf4aacb7c85b34185a9b1a8cbbf8c6, type: 3}
 --- !u!1001 &842510705
