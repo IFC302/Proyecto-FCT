@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour
     State _state = State.Idle;
 
     Animator _ac;
+    NavMeshAgent _agent;
     float _range = 50f; // Rango de visión que tendrá el zombi
     Citizen _target;
 
@@ -37,18 +39,41 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // Si el estado es Idle
-        if (_state == State.Idle)
+        switch (_state)
         {
-            // Busca al oponente más cercano
-            var citizen = FindClosestCitizenInRange();
-            // Si ha encontrado a alguno
-            if (citizen != null)
-            {
-                // Lo perseguimos
-                _target = citizen;
-                SetState(State.Running);
-            }
+            case State.Idle:
+                // Busca al oponente más cercano
+                var citizen = FindClosestCitizenInRange();
+                // Si ha encontrado a alguno
+                if (citizen != null)
+                {
+                    // Lo perseguimos
+                    _target = citizen;
+                    SetState(State.Running);
+                }
+                break;
+            case State.Running:
+                // Si está vivo
+                if (_target != null)
+                {
+                    if ((transform.position - _target.transform.position).sqrMagnitude < 1f)
+                    {
+                        SetState(State.Attacking);
+                        // Cuándo empiece a atacar
+                        _agent.isStopped = true;
+                    }
+                    else
+                    {
+                        _agent.SetDestination(_target.transform.position);
+                    }
+                }
+                break;
         }
+    }
+
+    public void Attack()
+    {
+        // LLamar a la animación
     }
 
     // Cuándo le pegan
