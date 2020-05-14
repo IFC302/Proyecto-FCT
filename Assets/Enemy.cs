@@ -156,6 +156,7 @@ public class Enemy : MonoBehaviour
                     break;
                 case State.Dead: // Cuándo muere
                     // Animación de morir
+                    _agent.isStopped = true; // Desactivamos el Nav Mesh Agent
                     _ac.CrossFade("Die", 0.1f);
                     // Si hacemos un destroy de this va a destruir el componente Enemy, no el objeto
                     Destroy(gameObject, 2f); // Destruimos el objeto en 2 sec
