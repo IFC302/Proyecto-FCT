@@ -34,12 +34,12 @@ public class Citizen : MonoBehaviour
 
     void OnEnable()
     {
-        Citizens.Add(this);
+        Citizens.Add(this); // El ciudadano se añade a la población
     }
 
     void OnDisable()
     {
-        Citizens.Remove(this);
+        Citizens.Remove(this); // El ciudadano se quita de la población para que no sea un objetivo posible
     }
 
     void GetNextObjetive()

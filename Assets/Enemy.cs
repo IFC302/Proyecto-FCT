@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     State _state = State.Idle;
 
     Animator _ac;
+    float _range = 50f; // Rango de visión que tendrá el zombi
+    Citizen _target;
 
     int lives = 5;
 
@@ -30,6 +32,23 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _ac = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        // Si el estado es Idle
+        if (_state == State.Idle)
+        {
+            // Busca al oponente más cercano
+            var citizen = FindClosestCitizenInRange();
+            // Si ha encontrado a alguno
+            if (citizen != null)
+            {
+                // Lo perseguimos
+                _target = citizen;
+                SetState(State.Running);
+            }
+        }
     }
 
     // Cuándo le pegan
@@ -51,6 +70,31 @@ public class Enemy : MonoBehaviour
     void OnDisable()
     {
         Enemies.Remove(this);
+    }
+
+    // Comprueba si el enemigo está en rango
+    bool IsInRange(Citizen enemy)
+    {
+        var dist = (enemy.transform.position - transform.position).sqrMagnitude;
+        return dist < _range * _range;
+    }
+
+    // Busca al enemigo mas cercano
+    Citizen FindClosestCitizenInRange()
+    {
+        float closest = int.MaxValue;
+        Citizen candidate = null;
+        float sqRange = _range * _range;
+        foreach (var enemy in Citizen.Citizens)
+        {
+            var dist = (enemy.transform.position - transform.position).sqrMagnitude;
+            if (dist < closest && dist < sqRange)
+            {
+                closest = dist;
+                candidate = enemy;
+            }
+        }
+        return candidate;
     }
 
     void SetState(State state)
