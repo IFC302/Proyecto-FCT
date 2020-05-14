@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
                 if (_target != null)
                 {
                     // Si la distancia es la suficiente para pegarle
-                    if ((transform.position - _target.transform.position).sqrMagnitude < 1f)
+                    if ((transform.position - _target.transform.position).sqrMagnitude < 2f)
                     {
                         SetState(State.Attacking);
                     }
