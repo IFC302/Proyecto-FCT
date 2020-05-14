@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _ac = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -56,16 +57,19 @@ public class Enemy : MonoBehaviour
                 // Si está vivo
                 if (_target != null)
                 {
+                    // Si la distancia es la suficiente para pegarle
                     if ((transform.position - _target.transform.position).sqrMagnitude < 1f)
                     {
                         SetState(State.Attacking);
-                        // Cuándo empiece a atacar
-                        _agent.isStopped = true;
                     }
                     else
                     {
                         _agent.SetDestination(_target.transform.position);
                     }
+                }
+                else
+                {
+                    SetState(State.Idle);
                 }
                 break;
         }
@@ -74,6 +78,16 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         // LLamar a la animación
+        // Si no hay dos zombis atacando al mismo
+        if (_target != null)
+        {
+            _target.Hit(1);
+        }
+    }
+
+    public void AttackEnd()
+    {
+        SetState(State.Running);
     }
 
     // Cuándo le pegan
@@ -130,12 +144,14 @@ public class Enemy : MonoBehaviour
             switch (_state)
             {
                 case State.Running:
+                    _agent.isStopped = false;
                     _ac.CrossFade("Run", 0.1f);
                     break;
                 case State.Idle:
                     _ac.CrossFade("Idle", 0.1f);
                     break;
                 case State.Attacking:
+                    _agent.isStopped = true;
                     _ac.CrossFade("Attack", 0.1f);
                     break;
                 case State.Dead: // Cuándo muere
