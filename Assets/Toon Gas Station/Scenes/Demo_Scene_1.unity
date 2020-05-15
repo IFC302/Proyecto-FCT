@@ -256,7 +256,7 @@ PrefabInstance:
     - target: {fileID: 2700551214286876178, guid: bb2793b4b26ae1d4f95ba868163942f9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2700551214286876178, guid: bb2793b4b26ae1d4f95ba868163942f9,
         type: 3}
@@ -2998,7 +2998,7 @@ PrefabInstance:
     - target: {fileID: 4319882069984928348, guid: c16577ab8353d8648bde1db08831fccb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4319882069984928348, guid: c16577ab8353d8648bde1db08831fccb,
         type: 3}
@@ -5564,6 +5564,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 345632291}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &349917552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 349917553}
+  m_Layer: 0
+  m_Name: CarDoors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &349917553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349917552}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.4698458, y: 0.89352715, z: -0.043539077}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 512310825}
+  - {fileID: 1753469149}
+  - {fileID: 592992180}
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &352959290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6376,7 +6409,7 @@ Transform:
   - {fileID: 950153566454573220}
   - {fileID: 1338663301}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &463497205
 PrefabInstance:
@@ -6938,6 +6971,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 511507962}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &512310824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 512310825}
+  m_Layer: 0
+  m_Name: CarDoor (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &512310825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512310824}
+  m_LocalRotation: {x: -0, y: -0.6155171, z: -0, w: 0.78812355}
+  m_LocalPosition: {x: 27.040154, y: -0.59352714, z: 20.98354}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 349917553}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &523082222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7740,11 +7803,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592992179}
   m_LocalRotation: {x: -0, y: -0.6155171, z: -0, w: 0.78812355}
-  m_LocalPosition: {x: 33.93, y: 0.3, z: 12.689}
+  m_LocalPosition: {x: 30.460155, y: -0.59352714, z: 12.732539}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1381409722}
-  m_RootOrder: 16
+  m_Father: {fileID: 349917553}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &593605528
 PrefabInstance:
@@ -12092,7 +12155,7 @@ PrefabInstance:
     - target: {fileID: 7094775376229807493, guid: 4e17468a40d5ede45a0ac9499a26a5dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7094775376229807493, guid: 4e17468a40d5ede45a0ac9499a26a5dd,
         type: 3}
@@ -20840,7 +20903,6 @@ Transform:
   - {fileID: 731478638}
   - {fileID: 2034380840}
   - {fileID: 487217425}
-  - {fileID: 592992180}
   m_Father: {fileID: 259286900}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25413,12 +25475,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753469148}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.698, y: 0, z: 3.08}
+  m_LocalRotation: {x: -0, y: -0.6155171, z: -0, w: 0.78812355}
+  m_LocalPosition: {x: 39.13053, y: -0.59352714, z: -5.857658}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 341502044}
-  m_RootOrder: 2
+  m_Father: {fileID: 349917553}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1758508531
 PrefabInstance:
