@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
                 break;
             case State.Running:
                 // Si está vivo
-                if (_target != null)
+                if (_target != null && _target.IsAlive)
                 {
                     // Si la distancia es la suficiente para pegarle
                     if ((transform.position - _target.transform.position).sqrMagnitude < 2f)
@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
     {
         // LLamar a la animación
         // Si no hay dos zombis atacando al mismo
-        if (_target != null)
+        if (_target != null && _target.IsAlive)
         {
             _target.Hit(1);
         }
@@ -124,13 +124,13 @@ public class Enemy : MonoBehaviour
         float closest = int.MaxValue;
         Citizen candidate = null;
         float sqRange = _range * _range;
-        foreach (var enemy in Citizen.Citizens)
+        foreach (var citizen in Citizen.Citizens)
         {
-            var dist = (enemy.transform.position - transform.position).sqrMagnitude;
-            if (dist < closest && dist < sqRange)
+            var dist = (citizen.transform.position - transform.position).sqrMagnitude;
+            if (citizen.IsAlive && dist < closest && dist < sqRange)
             {
                 closest = dist;
-                candidate = enemy;
+                candidate = citizen;
             }
         }
         return candidate;

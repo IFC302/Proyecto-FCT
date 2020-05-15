@@ -18,6 +18,9 @@ public class Stage : MonoBehaviour
     [HideInInspector]
     public List<Transform> Cars = new List<Transform>(); // Resguardo
 
+    [HideInInspector]
+    public int Score = 0;
+
     void Awake()
     {
         Instance = this;
@@ -33,7 +36,7 @@ public class Stage : MonoBehaviour
         Objectives.Clear();
         for (int i = 0; i < _objectivesParent.childCount; i++)
         {
-            Cars.Add(_objectivesParent.GetChild(i));
+            Objectives.Add(_objectivesParent.GetChild(i));
         }
     }
 }
