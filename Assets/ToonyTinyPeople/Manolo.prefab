@@ -1158,7 +1158,7 @@ Animator:
   m_GameObject: {fileID: 7094775376229575141}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fbbb7e0ccd296444f8f4cb972237bf3a, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d699fd66371c69e4fa183a2d3fcd26ef, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c3facdaf90ff14a8a2a5046e14a5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zombie: {fileID: 0}
+  _zombie: {fileID: 879096303521876338, guid: 9aaf4aacb7c85b34185a9b1a8cbbf8c6, type: 3}
 --- !u!195 &-6789384299678721166
 NavMeshAgent:
   m_ObjectHideFlags: 0
