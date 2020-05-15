@@ -139,6 +139,10 @@ public class Player : MonoBehaviour
                     // Pasamos a buscar objetivo de nuevo
                     SetState(State.Idle);
                 }
+                else // Si tiene objetivo
+                {
+                    transform.LookAt(_target.transform);
+                }
                 break;
             case State.Dead:
                 break;

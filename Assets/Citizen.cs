@@ -14,19 +14,28 @@ public class Citizen : MonoBehaviour
         Dead
     }
 
+    // Controla que no hayan dos zombis pegando al mismo ciudadano
+    public bool IsAlive
+    {
+        get
+        {
+            return _health > 0;
+        }
+    }
+
     [SerializeField]
     GameObject _zombie = null;
 
-    int health = 2;
+    int _health = 2;
     State _state = State.Idle;
     NavMeshAgent _agent;
     Animator _ac;
-    int _objectives = 1; // lista de objetivos a coger
+    int _objectives = 3; // lista de objetivos a coger
     Vector3 _target = Vector3.zero;
 
     public void Hit(int damage)
     {
-        if (--health <= 0)
+        if (--_health <= 0)
         {
             SetState(State.Dead);
         }
@@ -34,12 +43,12 @@ public class Citizen : MonoBehaviour
 
     void OnEnable()
     {
-        Citizens.Add(this);
+        Citizens.Add(this); // El ciudadano se añade a la población
     }
 
     void OnDisable()
     {
-        Citizens.Remove(this);
+        Citizens.Remove(this); // El ciudadano se quita de la población para que no sea un objetivo posible
     }
 
     void GetNextObjetive()
@@ -83,6 +92,7 @@ public class Citizen : MonoBehaviour
                 {
                     _ac.CrossFade("Idle", 0.1f);
                     Destroy(gameObject, 0.4f);
+                    Stage.Instance.Score += 1;
                 }
             }
         }
