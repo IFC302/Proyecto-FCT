@@ -21,7 +21,7 @@ public class Citizen : MonoBehaviour
     State _state = State.Idle;
     NavMeshAgent _agent;
     Animator _ac;
-    int _objectives = 1; // lista de objetivos a coger
+    int _objectives = 3; // lista de objetivos a coger
     Vector3 _target = Vector3.zero;
 
     public void Hit(int damage)
