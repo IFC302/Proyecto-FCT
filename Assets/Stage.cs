@@ -9,7 +9,10 @@ public class Stage : MonoBehaviour
 
     [SerializeField]
     Transform _carsParent;
+    [SerializeField]
+    Transform _objectivesParent;
 
+    [HideInInspector]
     public List<Transform> Objectives = new List<Transform>(); // Objetivos: Papel higiénico, comida, etc.
 
     [HideInInspector]
@@ -25,6 +28,12 @@ public class Stage : MonoBehaviour
         for (int i = 0; i < _carsParent.childCount; i++)
         {
             Cars.Add(_carsParent.GetChild(i));
+        }
+
+        Objectives.Clear();
+        for (int i = 0; i < _objectivesParent.childCount; i++)
+        {
+            Cars.Add(_objectivesParent.GetChild(i));
         }
     }
 }
