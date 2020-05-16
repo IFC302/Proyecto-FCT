@@ -148,6 +148,7 @@ public class Enemy : MonoBehaviour
                     _ac.CrossFade("Run", 0.1f);
                     break;
                 case State.Idle:
+                    _agent.isStopped = true;
                     _ac.CrossFade("Idle", 0.1f);
                     break;
                 case State.Attacking:
