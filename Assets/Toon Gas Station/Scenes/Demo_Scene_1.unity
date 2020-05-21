@@ -16677,7 +16677,7 @@ PrefabInstance:
     - target: {fileID: 1454218048069673832, guid: 9aaf4aacb7c85b34185a9b1a8cbbf8c6,
         type: 3}
       propertyPath: m_Speed
-      value: 4.5
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9aaf4aacb7c85b34185a9b1a8cbbf8c6, type: 3}
@@ -21671,7 +21671,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: -2, y: 0, z: 3.13}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -21685,8 +21685,8 @@ LineRenderer:
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

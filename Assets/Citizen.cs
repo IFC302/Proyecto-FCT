@@ -81,6 +81,7 @@ public class Citizen : MonoBehaviour
                 {
                     // Se va al siguiente
                     GetNextObjetive();
+                    _agent.SetDestination(_target);
                 }
                 else if (_objectives == 0) // Cuándo llege al papel higiénico
                 {
