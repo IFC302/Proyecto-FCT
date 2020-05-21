@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Stage : MonoBehaviour
 {
     public static Stage Instance;
 
     [SerializeField]
-    Transform _carsParent;
+    Transform _carsParent = null;
     [SerializeField]
-    Transform _objectivesParent;
+    Transform _objectivesParent = null;
 
     [HideInInspector]
     public List<Transform> Objectives = new List<Transform>(); // Objetivos: Papel higiénico, comida, etc.
@@ -20,6 +18,11 @@ public class Stage : MonoBehaviour
 
     [HideInInspector]
     public int Score = 0;
+
+    public void Restart()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
 
     void Awake()
     {
