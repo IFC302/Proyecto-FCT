@@ -24,7 +24,7 @@ public class Citizen : MonoBehaviour
     [SerializeField]
     GameObject _zombie = null;
 
-    int _health = 2;
+    int _health = 3;
     State _state = State.Idle;
     NavMeshAgent _agent;
     Animator _ac;
