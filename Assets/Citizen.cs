@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class Citizen : MonoBehaviour
 {
-    public static List<Citizen> Citizens = new List<Citizen>();
-
     enum State
     {
         Idle,
@@ -33,38 +31,34 @@ public class Citizen : MonoBehaviour
     int _objectives = 3; // lista de objetivos a coger
     Vector3 _target = Vector3.zero;
 
+    float _nextAudio = 5f;
+
+    List<AudioSource> _audios = new List<AudioSource>();
+
     public void Hit(int damage)
     {
+        _audios[Random.Range(0, _audios.Count)].Play();
         if (--_health <= 0)
         {
             SetState(State.Dead);
         }
     }
 
-    void OnEnable()
-    {
-        Citizens.Add(this); // El ciudadano se añade a la población
-    }
-
-    void OnDisable()
-    {
-        Citizens.Remove(this); // El ciudadano se quita de la población para que no sea un objetivo posible
-    }
-
-    void GetNextObjetive()
+    void GetNextObjective()
     {
         _target = Stage.Instance.Objectives[Random.Range(0, Stage.Instance.Objectives.Count)].position;
     }
 
     void Start()
     {
-        // Siguiente objetivo
-        GetNextObjetive();
+        Stage.Instance.AddCitizen(this);
+        GetNextObjective();
         _ac = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
-        _target = Stage.Instance.Objectives[Random.Range(0, Stage.Instance.Objectives.Count)].position;
-        _agent.SetDestination(_target); // Destino del ciudadano
+        _agent.SetDestination(_target);
         SetState(State.Running);
+        _audios.Insert(0, GetComponentInChildren<AudioSource>());
+        _nextAudio = Random.Range(1f, 90f);
     }
 
     void Update()
@@ -80,7 +74,7 @@ public class Citizen : MonoBehaviour
                 if (_objectives > 0)
                 {
                     // Se va al siguiente
-                    GetNextObjetive();
+                    GetNextObjective();
                     _agent.SetDestination(_target);
                 }
                 else if (_objectives == 0) // Cuándo llege al papel higiénico
@@ -91,11 +85,19 @@ public class Citizen : MonoBehaviour
                 }
                 else // Cuándo llege al coche (-1)
                 {
+                    SetState(State.Idle);
                     _ac.CrossFade("Idle", 0.1f);
-                    Destroy(gameObject, 0.4f);
-                    Stage.Instance.Score += 1;
+                    Destroy(gameObject, 0.5f);
+                    Stage.Instance.RemoveCitizen(this);
+                    Stage.Instance.RescueCitizen();
                 }
             }
+        }
+        _nextAudio -= Time.deltaTime;
+        if (_nextAudio < 0f)
+        {
+            _audios[Random.Range(0, _audios.Count)].Play();
+            _nextAudio = Random.Range(1f, 90f);
         }
     }
 
@@ -111,6 +113,7 @@ public class Citizen : MonoBehaviour
                     break;
 
                 case State.Dead:
+                    Stage.Instance.RemoveCitizen(this);
                     _ac.CrossFade("Die", 0.1f);
                     Instantiate(_zombie, transform.position, transform.rotation);
                     Destroy(gameObject);
