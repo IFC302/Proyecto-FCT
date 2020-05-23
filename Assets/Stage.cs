@@ -1,25 +1,78 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Stage : MonoBehaviour
 {
     public static Stage Instance;
 
     [SerializeField]
-    Transform _carsParent;
+    Transform _carsParent = null;
     [SerializeField]
-    Transform _objectivesParent;
+    Transform _objectivesParent = null;
+    [SerializeField]
+    TMPro.TextMeshProUGUI _citizens = null;
+    [SerializeField]
+    TMPro.TextMeshProUGUI _enemies = null;
+    [SerializeField]
+    TMPro.TextMeshProUGUI _gameOverText = null;
+    [SerializeField]
+    GameObject _gameOverPanel = null;
 
     [HideInInspector]
     public List<Transform> Objectives = new List<Transform>(); // Objetivos: Papel higiénico, comida, etc.
-
     [HideInInspector]
     public List<Transform> Cars = new List<Transform>(); // Resguardo
+    [HideInInspector]
+    public List<Enemy> Enemies = new List<Enemy>();
+    [HideInInspector]
+    public List<Citizen> Citizens = new List<Citizen>();
 
     [HideInInspector]
     public int Score = 0;
+
+    public void RescueCitizen()
+    {
+        Score++;
+    }
+
+    public void AddCitizen(Citizen c)
+    {
+        Citizens.Add(c);
+        _citizens.text = Citizens.Count.ToString();
+    }
+
+    public void RemoveCitizen(Citizen c)
+    {
+        Citizens.Remove(c);
+        _citizens.text = Citizens.Count.ToString();
+        if (Citizens.Count < 1)
+        {
+            _gameOverPanel.SetActive(true);
+            _gameOverText.text = Score.ToString();
+        }
+    }
+
+    public void AddZombie(Enemy z)
+    {
+        Enemies.Add(z);
+        _enemies.text = Enemies.Count.ToString();
+    }
+
+    public void RemoveZombie(Enemy z)
+    {
+        Enemies.Remove(z);
+        _enemies.text = Enemies.Count.ToString();
+        if (Enemies.Count < 1)
+        {
+            _gameOverPanel.SetActive(true);
+            _gameOverText.text = (Citizens.Count + Score).ToString();
+        }
+    }
+
+    public void Restart()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
 
     void Awake()
     {
@@ -27,14 +80,19 @@ public class Stage : MonoBehaviour
 
         // Recorremos todos los hijos de este objeto y nos los guardamos como coches
         // Esto lo hacemos para no tener que duplicar los coches y añadirlos todo el rato en la escena
+        _gameOverPanel.SetActive(false);
+        Enemies.Clear();
+        Citizens.Clear();
+        Score = 0;
+
         Cars.Clear();
-        for (int i = 0; i < _carsParent.childCount; i++)
+        for (int i = 0; i < _carsParent.childCount; ++i)
         {
             Cars.Add(_carsParent.GetChild(i));
         }
 
         Objectives.Clear();
-        for (int i = 0; i < _objectivesParent.childCount; i++)
+        for (int i = 0; i < _objectivesParent.childCount; ++i)
         {
             Objectives.Add(_objectivesParent.GetChild(i));
         }
