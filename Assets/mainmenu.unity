@@ -830,8 +830,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.07700001, y: 0.279}
   m_AnchorMax: {x: 0.9296667, y: 0.961}
-  m_AnchoredPosition: {x: -3.5, y: -58}
-  m_SizeDelta: {x: 3.7, y: -52}
+  m_AnchoredPosition: {x: -3.5, y: -232}
+  m_SizeDelta: {x: 4, y: -399}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880697460
 MonoBehaviour:
@@ -851,10 +851,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "eres un policia, debes proteger a la poblacion local de los infectados\n\npara
-    ello debes evitar el mayor numero de contagios posibles \n\nla partida finaizara
-    como perdida si toda la poblacion es infectada\n\ntu mision es disparar al mayor
-    numero posible de infectados"
+  m_text: 'eres un policia, debes proteger a la poblacion local de los infectados
+
+
+
+    no
+    hay vacuna. tu mision es disparar al mayor numero posible de infectados'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a4e1bbb53685de4997f7e4f914913fb, type: 2}
   m_sharedMaterial: {fileID: -5935813431925140944, guid: 3a4e1bbb53685de4997f7e4f914913fb,
@@ -924,12 +926,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1880697460}
-    characterCount: 263
+    characterCount: 147
     spriteCount: 0
-    spaceCount: 46
-    wordCount: 43
+    spaceCount: 26
+    wordCount: 25
     linkCount: 0
-    lineCount: 15
+    lineCount: 8
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
