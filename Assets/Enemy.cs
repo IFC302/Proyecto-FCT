@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public static List<Enemy> Enemies = new List<Enemy>();
-
     enum State
     {
         Idle,
@@ -19,10 +17,9 @@ public class Enemy : MonoBehaviour
 
     Animator _ac;
     NavMeshAgent _agent;
-    float _range = 50f; // Rango de visión que tendrá el zombi
     Citizen _target;
 
-    int lives = 5;
+    int lives = 2;
 
     // Para que el jugador no lo considere como un objetivo válido
     public bool IsAlive
@@ -33,6 +30,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        Stage.Instance.AddZombie(this);
         _ac = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
     }
@@ -55,10 +53,12 @@ public class Enemy : MonoBehaviour
                 break;
             case State.Running:
                 // Si está vivo
+                var c = FindClosestCitizenInRange();
+                _target = c;
                 if (_target != null && _target.IsAlive)
                 {
                     // Si la distancia es la suficiente para pegarle
-                    if ((transform.position - _target.transform.position).sqrMagnitude < 2f)
+                    if ((transform.position - _target.transform.position).sqrMagnitude < 4f)
                     {
                         SetState(State.Attacking);
                     }
@@ -70,6 +70,12 @@ public class Enemy : MonoBehaviour
                 else
                 {
                     SetState(State.Idle);
+                }
+                break;
+            case State.Attacking:
+                if (_target != null && _target.IsAlive)
+                {
+                    transform.LookAt(_target.transform);
                 }
                 break;
         }
@@ -99,35 +105,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Cuándo los zombis se activan se registran
-    void OnEnable()
-    {
-        Enemies.Add(this);
-    }
-
-    // Cuándo los zombis mueren se retiran
-    void OnDisable()
-    {
-        Enemies.Remove(this);
-    }
-
-    // Comprueba si el enemigo está en rango
-    bool IsInRange(Citizen enemy)
-    {
-        var dist = (enemy.transform.position - transform.position).sqrMagnitude;
-        return dist < _range * _range;
-    }
-
-    // Busca al enemigo mas cercano
     Citizen FindClosestCitizenInRange()
     {
         float closest = int.MaxValue;
         Citizen candidate = null;
-        float sqRange = _range * _range;
-        foreach (var citizen in Citizen.Citizens)
+        foreach (var citizen in Stage.Instance.Citizens)
         {
             var dist = (citizen.transform.position - transform.position).sqrMagnitude;
-            if (citizen.IsAlive && dist < closest && dist < sqRange)
+            if (citizen.IsAlive && dist < closest)
             {
                 closest = dist;
                 candidate = citizen;
@@ -157,6 +142,7 @@ public class Enemy : MonoBehaviour
                     break;
                 case State.Dead: // Cuándo muere
                     // Animación de morir
+                    Stage.Instance.RemoveZombie(this);
                     _agent.isStopped = true; // Desactivamos el Nav Mesh Agent
                     _ac.CrossFade("Die", 0.1f);
                     // Si hacemos un destroy de this va a destruir el componente Enemy, no el objeto
